@@ -1,8 +1,11 @@
-'use client'
+'use client';
 
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { sendEmail } from '@/utils/send-email';
+import { Button } from './ui/button';
+import { Loader, MessageSquare } from 'lucide-react'; // Importing icons from Lucide React
+import Link from 'next/link';
 
 export type FormData = {
     name: string;
@@ -11,10 +14,21 @@ export type FormData = {
 };
 
 const Contact: FC = () => {
-    const { register, handleSubmit } = useForm<FormData>();
+    const { register, handleSubmit, reset } = useForm<FormData>();
+    const [isLoading, setIsLoading] = useState(false);
 
-    function onSubmit(data: FormData) {
-        sendEmail(data);
+    async function onSubmit(data: FormData) {
+        setIsLoading(true);
+        try {
+            await sendEmail(data);
+            alert('Form submitted successfully!');
+            reset(); // Reset the form fields
+        } catch (error) {
+            console.error(error);
+            alert('There was an error submitting the form.');
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     return (
@@ -61,10 +75,28 @@ const Contact: FC = () => {
                     {...register('message', { required: true })}
                 ></textarea>
             </div>
-            <div>
-                <button className='hover:shadow-form rounded-md bg-purple-500 py-3 px-8 text-base font-semibold text-white outline-none'>
-                    Submit
-                </button>
+            <div className='flex items-center justify-center space-x-4'>
+                <Button type='submit' disabled={isLoading} className='flex items-center'>
+                    {isLoading ? (
+                        <>
+                            <Loader className='animate-spin mr-2 h-5 w-5' />
+                            Submitting...
+                        </>
+                    ) : (
+                        'Submit'
+                    )}
+                </Button>
+                <Link href="https://Wa.me/989152027577">
+                    <>
+                        <Button
+                            type='button'
+                            className='flex items-center bg-green-500 hover:bg-green-600'
+                        >
+                            <MessageSquare className='mr-2 h-5 w-5' />
+                            WhatsApp Business
+                        </Button>
+                    </>
+                </Link>
             </div>
         </form>
     );

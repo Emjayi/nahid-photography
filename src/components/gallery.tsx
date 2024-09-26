@@ -1,152 +1,145 @@
-'use client'
+'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react'
-import { usePathname, useSearchParams } from 'next/navigation'
-import Lightbox from './lightbox'
-import { IKImage } from "imagekitio-react"
-import { motion, AnimatePresence } from 'framer-motion'
-import { navbarLinks } from '@/lib/data'
-import Loading from '@/app/loading'
-import React from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { IKImage } from 'imagekitio-react';
+import { motion } from 'framer-motion';
+import { navbarLinks } from '@/lib/data';
+import Loading from '@/app/loading';
+import { useImageCache } from '@/contexts/ImageCacheContext';
+import React from 'react';
 
-const urlEndpoint = process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT || ''
+const urlEndpoint = process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT;
 
 interface ImageData {
-    filePath: string
-    name: string
-    createdAt: string
+    id: string;
+    filePath: string;
+    name: string;
+    createdAt: string;
+    hash: string;
 }
 
 export default function Gallery() {
-    const pathname = usePathname()
-    const searchParams = useSearchParams()
+    const pathname = usePathname();
+    const router = useRouter();
+    const [images, setImages] = useState<ImageData[]>([]);
+    const [loadedImages, setLoadedImages] = useState<number[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+    const { cache, setCache } = useImageCache();
 
-    const [images, setImages] = useState<ImageData[]>([])
-    const [loadedImages, setLoadedImages] = useState<number[]>([])
-    const [loading, setLoading] = useState(true)
-    const [lightboxOpen, setLightboxOpen] = useState(false)
-    const [currentIndex, setCurrentIndex] = useState(0)
-    const [error, setError] = useState<string | null>(null)
-    const isMounted = useRef(true)
-
-    const currentCategory = navbarLinks.works.find(link => link.link === pathname)?.name.toLowerCase() || ''
-
-    const fetchImages = useCallback(async (category: string) => {
-        setLoading(true);
-        setImages([]);
-        setLoadedImages([]);
-        setError(null);
-
-        const timeoutDuration = 10000; // 5 seconds
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), timeoutDuration);
-
-        try {
-            const response = await fetch(`/api/images?category=${category}`, {
-                signal: controller.signal
-            });
-            clearTimeout(timeoutId);
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || 'Failed to fetch images');
-            }
-
-            const data: ImageData[] = await response.json();
-            if (isMounted.current) {
-                setImages(data);
-            }
-        } catch (error: any) {
-            console.error('Error fetching images:', error);
-            if (isMounted.current) {
-                setError(error.name === 'AbortError'
-                    ? 'Cannot load the images. Please check your internet connection or simply reload the page.'
-                    : error.message || 'An unknown error occurred');
-            }
-        } finally {
-            if (isMounted.current) {
-                setLoading(false);
-            }
-        }
-    }, [])
+    const currentCategory =
+        navbarLinks.works.find((link) => link.link === pathname)?.name.toLowerCase() || '';
 
     useEffect(() => {
-        isMounted.current = true
-        if (currentCategory) {
-            fetchImages(currentCategory)
+        if (!currentCategory) return;
+
+        if (cache[currentCategory]) {
+            // Use cached images
+            setImages(cache[currentCategory]);
+            setLoading(false);
+        } else {
+            // Fetch images and cache them
+            const fetchImages = async () => {
+                setError(null);
+                setLoading(true);
+
+                try {
+                    const response = await fetch(`/api/images?category=${currentCategory}&limit=1000`);
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.error || 'Failed to fetch images');
+                    }
+                    const data = await response.json();
+
+                    const fetchedImages = data.images.map((image: any) => ({
+                        id: image.fileId,
+                        filePath: image.filePath,
+                        name: image.name,
+                        createdAt: image.createdAt,
+                        hash: image.hash,
+                    }));
+
+                    setImages(fetchedImages);
+                    setCache((prevCache) => ({
+                        ...prevCache,
+                        [currentCategory]: fetchedImages,
+                    }));
+                } catch (error: any) {
+                    console.error('Error fetching images:', error);
+                    setError(error.message || 'An unknown error occurred');
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            fetchImages();
         }
-        return () => {
-            isMounted.current = false
+    }, [currentCategory, cache, setCache]);
+
+    useEffect(() => {
+        if (!loading && images.length > 70) {
+            const savedPosition = sessionStorage.getItem(`scroll-position-${currentCategory}`);
+            if (savedPosition) {
+                window.scrollTo(0, parseInt(savedPosition, 10));
+                // Remove the saved position after restoring it
+                sessionStorage.removeItem(`scroll-position-${currentCategory}`);
+            }
         }
-    }, [currentCategory, fetchImages])
+    }, [currentCategory, loading, images]);
 
     const handleImageLoad = useCallback((index: number) => {
-        setLoadedImages(prev => [...prev, index])
-    }, [])
+        setLoadedImages((prev) => [...prev, index]);
+    }, []);
 
-    const openLightbox = useCallback((index: number) => {
-        setCurrentIndex(index)
-        setLightboxOpen(true)
-        // Update URL without causing a route change
-        window.history.pushState(null, '', `${pathname}?image=${index}`)
-    }, [pathname])
+    const openImagePage = useCallback(
+        (index: number) => {
+            const imageHash = images[index].hash;
+            // Save scroll position
+            sessionStorage.setItem(`scroll-position-${currentCategory}`, window.scrollY.toString());
+            router.push(`/works/${currentCategory}/${imageHash}`);
+        },
+        [images, router, currentCategory]
+    );
 
-    const closeLightbox = () => {
-        setLightboxOpen(false)
-        // Remove 'image' parameter from URL without causing a route change
-        const url = new URL(window.location.href)
-        url.searchParams.delete('image')
-        window.history.replaceState(null, '', url.toString())
-    }
-
-    // Handle opening Lightbox based on URL parameter
-    useEffect(() => {
-        if (images.length === 0) return
-
-        const imageParam = searchParams.get('image')
-        if (imageParam) {
-            const index = parseInt(imageParam, 10)
-            if (!isNaN(index) && index >= 0 && index < images.length) {
-                setCurrentIndex(index)
-                setLightboxOpen(true)
-            }
-        }
-    }, [searchParams, images])
+    const memoizedGalleryImages = useMemo(() => {
+        return images.map((image, index) => (
+            <GalleryImage
+                key={image.id}
+                image={image}
+                index={index}
+                isLoaded={loadedImages.includes(index)}
+                onLoad={() => handleImageLoad(index)}
+                onClick={() => openImagePage(index)}
+            />
+        ));
+    }, [images, loadedImages, handleImageLoad, openImagePage]);
 
     if (error) {
-        return <div className="text-red-500 text-center m-10 h-[60vh] flex items-center justify-center">{error}</div>
+        return (
+            <div className="text-red-500 text-center m-10 h-[60vh] flex items-center justify-center">
+                {error}
+            </div>
+        );
     }
 
     return (
         <div className="min-h-screen min-w-screen bg-white">
-            {loading && (
-                <div className="flex items-center justify-center h-48">
-                    <Loading />
+            <main
+                className={`container mx-auto px-4 transition-opacity duration-500 ${loading && images.length === 0 ? 'opacity-0' : 'opacity-100'
+                    }`}
+            >
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                    {memoizedGalleryImages}
                 </div>
-            )}
-            <main className={`container mx-auto px-4 transition-opacity duration-500 ${loading ? 'opacity-0' : 'opacity-100'}`}>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
-                    {images.map((image, index) => (
-                        <GalleryImage
-                            key={image.filePath}
-                            image={image}
-                            index={index}
-                            isLoaded={loadedImages.includes(index)}
-                            onLoad={() => handleImageLoad(index)}
-                            onClick={() => openLightbox(index)}
-                        />
-                    ))}
-                </div>
+                {loading && (
+                    <div className="flex items-center justify-center h-48">
+                        <Loading />
+                    </div>
+                )}
             </main>
-            {lightboxOpen && (
-                <Lightbox
-                    images={images.map(img => ({ src: img.filePath, alt: img.name }))}
-                    currentIndex={currentIndex}
-                    onClose={closeLightbox}
-                />
-            )}
         </div>
-    )
+    );
 }
 
 interface GalleryImageProps {
@@ -157,39 +150,42 @@ interface GalleryImageProps {
     onClick: () => void;
 }
 
-const GalleryImage = ({ image, index, isLoaded, onLoad, onClick }: GalleryImageProps) => {
+const GalleryImage = React.memo(function GalleryImage({
+    image,
+    index,
+    isLoaded,
+    onLoad,
+    onClick,
+}: GalleryImageProps) {
     return (
         <motion.div
             initial={{ opacity: 0 }}
             animate={isLoaded ? { opacity: 1 } : {}}
-            transition={{ duration: 0.25, delay: index * 0.05 }}
+            transition={{ duration: 0.25, delay: 0.05 }}
             className="relative overflow-hidden rounded-lg cursor-pointer group"
             onClick={onClick}
-            aria-label={`Open image ${image.name} in lightbox`}
+            aria-label={`Open image ${image.name}`}
             role="button"
             tabIndex={0}
             onKeyPress={(e) => {
-                if (e.key === 'Enter') onClick()
+                if (e.key === 'Enter') onClick();
             }}
         >
-            {!isLoaded && (
-                <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
-                    <Loading />
-                </div>
-            )}
+            {!isLoaded && <div className="absolute inset-0 bg-gray-400 animate-pulse" />}
+
             <IKImage
                 urlEndpoint={urlEndpoint}
                 path={image.filePath}
-                transformation={[{ height: "400", width: "400" }]}
+                transformation={[{ height: '400', width: '400' }]}
                 lqip={{ active: true }}
                 loading="lazy"
-                onLoad={onLoad} // Correctly calling the passed onLoad prop
+                onLoad={onLoad}
                 alt={image.name}
-                className={`w-full h-full object-cover transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+                className={`w-full h-full object-cover transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'
+                    }`}
             />
-            <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                {/* Optional: Add overlay content like icons or captions */}
-            </div>
+
+            <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center" />
         </motion.div>
-    )
-}
+    );
+});
