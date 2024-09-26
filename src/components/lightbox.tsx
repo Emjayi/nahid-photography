@@ -94,7 +94,7 @@ export default function Lightbox({ images, currentIndex, onClose }: LightboxProp
                     navigation={false} // Using custom navigation
                 >
                     {images.map((image, index) => (
-                        <SwiperSlide>
+                        <SwiperSlide key={index}>
                             <div className="relative w-full h-full flex items-center justify-center">
                                 {!loadedSlides.has(index) && currentSlide === index && <Loading />}
                                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: .5, delay: .4 }}
