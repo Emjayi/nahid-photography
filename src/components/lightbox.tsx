@@ -96,7 +96,7 @@ export default function Lightbox({ images, currentIndex, onClose }: LightboxProp
                     {images.map((image, index) => (
                         <SwiperSlide key={index}>
                             <div className="relative w-full h-full flex items-center justify-center">
-                                {!loadedSlides.has(index) && currentSlide === index && <Loading />}
+                                {!loadedSlides.has(index) && currentSlide !== index && <Loading />}
                                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: .5, delay: .4 }}
                                     className={`object-contain w-[60%] h-full flex items-center justify-center`}>
                                     <IKImage

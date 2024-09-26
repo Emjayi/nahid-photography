@@ -124,7 +124,7 @@ export default function Gallery() {
     }
 
     return (
-        <div className="min-h-screen min-w-screen bg-white">
+        <div className="min-h-[60vh] min-w-screen bg-white">
             <main
                 className={`container mx-auto px-4 transition-opacity duration-500 ${loading && images.length === 0 ? 'opacity-0' : 'opacity-100'
                     }`}
