@@ -54,7 +54,7 @@ const Footer = () => {
             {showFooter && <footer className="footer w-full bottom-0">
                 <div className="w-full mx-auto max-w-screen-xl p-4 flex flex-col items-center justify-center">
                     <p>
-                        <span className="text-sm text-gray-400 sm:text-center">© {new Date().getFullYear()} Alireza Refaei
+                        <span className="text-sm text-gray-400 sm:text-center">© {new Date().getFullYear()} Nahid Shariarpour
                         </span>
                     </p>
                     <div className="flex gap-2 mt-2">

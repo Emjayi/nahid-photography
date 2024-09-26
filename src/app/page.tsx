@@ -12,13 +12,10 @@ import 'swiper/css/pagination'
 const desktopImages: string[] = [
   '/bg/2.jpg',
   '/bg/3.jpg',
-  '/bg/4.jpg',
+  '/bg/1.jpg',
   '/bg/5.jpg',
   '/bg/6.jpg',
   '/bg/7.jpg',
-  '/bg/8.jpg',
-  '/bg/9.jpg',
-  '/bg/10.jpg',
 ]
 
 const mobileImages: string[] = [
@@ -29,13 +26,21 @@ const mobileImages: string[] = [
   '/bg-mobile/5.jpg',
   '/bg-mobile/6.jpg',
   '/bg-mobile/7.jpg',
-  '/bg-mobile/8.jpg',
 ]
 
 // Social Media Links Data
 const socialLinks = [
   {
-    href: 'https://www.instagram.com/alirezarefaei',
+    href: 'https://www.facebook.com/nahid.shahriarpour?mibextid=LQQJ4d',
+    icon: (
+      <svg className="w-5 h-5 p-[.5px]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        {/* Facebook SVG Path */}
+        <path d="M22.675 0h-21.35C.597 0 0 .597 0 1.325v21.351C0 23.403.597 24 1.325 24h11.495v-9.294H9.691v-3.622h3.129V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24l-1.918.001c-1.504 0-1.796.715-1.796 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.403 24 24 23.403 24 22.676V1.325C24 .597 23.403 0 22.675 0z" />
+      </svg>
+    ),
+  },
+  {
+    href: 'https://www.instagram.com/nahidshahriarpourphotography?igsh=MWl4em9hMjFoMW1lcQ==',
     icon: (
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         {/* Instagram SVG Path */}
@@ -48,7 +53,7 @@ const socialLinks = [
     ),
   },
   {
-    href: 'https://www.behance.net/alirezarefaei/',
+    href: 'https://www.behance.net/nahidshahria',
     icon: (
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         {/* Behance SVG Path */}
@@ -56,17 +61,9 @@ const socialLinks = [
       </svg>
     ),
   },
+
   {
-    href: 'https://www.pinterest.com/',
-    icon: (
-      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        {/* Pinterest SVG Path */}
-        <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z" />
-      </svg>
-    ),
-  },
-  {
-    href: 'https://www.linkedin.com/',
+    href: 'https://www.linkedin.com/in/nahid-shahriarpour-195a91109/',
     icon: (
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         {/* LinkedIn SVG Path */}
@@ -141,7 +138,7 @@ export default function Home() {
       <footer className="footer fixed w-screen bottom-0">
         <div className="w-full mx-auto max-w-screen-xl p-4 flex flex-col items-center justify-center">
           <p>
-            <span className="text-sm text-gray-300 font-semibold sm:text-center">© {new Date().getFullYear()} Alireza Refaei</span>
+            <span className="text-sm text-gray-300 font-semibold sm:text-center">© {new Date().getFullYear()} Nahid Shariarpour</span>
           </p>
           <div className="flex gap-2 mt-2">
             {socialLinks.map((link, index) => (

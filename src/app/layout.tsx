@@ -8,30 +8,30 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: {
-    default: 'Alireza Refaei',
-    template: 'Alireza Refaei | %s'
+    default: 'Nahid Shahriarpour',
+    template: 'Nahid Shahriarpour | %s'
   },
-  description: 'Alireza Refaei is a professional photographer specializing in capturing moments that tell stories.',
-  keywords: ['photography', 'photographer', 'Alireza Refaei', 'portfolio', 'images'],
-  authors: [{ name: 'Alireza Refaei' }],
-  creator: 'Alireza Refaei',
-  publisher: 'Alireza Refaei',
+  description: 'Nahid Shahriarpour is a professional photographer specializing in capturing moments that tell stories.',
+  keywords: ['photography', 'photographer', 'Nahid Shahriarpour', 'portfolio', 'images'],
+  authors: [{ name: 'Nahid Shahriarpour' }],
+  creator: 'Nahid Shahriarpour',
+  publisher: 'Nahid Shahriarpour',
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
   openGraph: {
-    title: 'Alireza Refaei | Professional Photographer',
-    description: 'Explore the captivating world of photography through the lens of Alireza Refaei.',
-    url: 'https://www.alirezarefaei.com',
-    siteName: 'Alireza Refaei Photography',
+    title: 'Nahid Shahriarpour | Professional Photographer',
+    description: 'Explore the captivating world of photography through the lens of Nahid Shahriarpour.',
+    url: 'https://nahid-photography.vercel.app/',
+    siteName: 'Nahid Shahriarpour Photography',
     images: [
       {
-        url: 'https://www.alirezarefaei.com/og-image.jpg',
+        url: 'https://nahid-photography.vercel.app/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Alireza Refaei Photography Portfolio',
+        alt: 'Nahid Shahriarpour Photography Portfolio',
       },
     ],
     locale: 'en_US',
@@ -39,10 +39,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Alireza Refaei | Professional Photographer',
-    description: 'Discover the art of visual storytelling through Alireza Refaei\'s photography.',
+    title: 'Nahid Shahriarpour | Professional Photographer',
+    description: 'Discover the art of visual storytelling through Nahid Shahriarpour\'s photography.',
     creator: '@alirezarefaei',
-    images: ['https://www.alirezarefaei.com/twitter-image.jpg'],
+    images: ['https://nahid-photography.vercel.app/twitter-image.jpg'],
   },
   robots: {
     index: true,
