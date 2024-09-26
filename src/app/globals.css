@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* body {
+    background-image: url('/back.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+} */
+.swiper-button-prev, .swiper-button-next {
+    color: rgba(243, 243, 243, 0.295) !important; 
+}
+:root{
+    --swiper-navigation-size: 30px !important
+}
+.swiper-button-next:hover, .swiper-button-prev:hover {
+    color: rgba(223, 223, 223, 0.9) !important; 
+}
+body {
+    background-color: black;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(0, 0, 0);
+    color: rgb(30, 30, 30);
+}
+.footer{
+    z-index: 100;
+}
+.prevent-select {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+  }
+  
+body {
+    --sb-track-color: #d4d4d4;
+    --sb-thumb-color: #383838;
+    --sb-size: 5px;
+  }
+  
+  body::-webkit-scrollbar {
+    width: var(--sb-size)
+  }
+  
+  body::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 3px;
+    
+  }
+  
+  @supports not selector(::-webkit-scrollbar) {
+    body {
+      scrollbar-color: var(--sb-thumb-color)
+                       var(--sb-track-color);
+    }
+  }
