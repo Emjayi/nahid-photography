@@ -43,7 +43,7 @@ export default function Lightbox({ images, currentIndex, onClose }: LightboxProp
     const handleSlideChange = useCallback((swiper: any) => {
         setCurrentSlide(swiper.realIndex)
         // Update URL with new image index
-        router.push(`${path}?image=${swiper.realIndex}`, { shallow: true })
+        router.push(`${path}?image=${swiper.realIndex}`)
     }, [router])
 
     // Handle image load
