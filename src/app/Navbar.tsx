@@ -125,9 +125,6 @@ const Navbar = () => {
                             >
                                 Information
                             </li>
-                            <li className="text-zinc-400 hover:text-zinc-200 duration-200 mix-blend-exclusion text-ellipsis cursor-pointer">
-                                Sales
-                            </li>
                         </ul>
                     </div>
                     {/* Works and Info Dropdowns */}
