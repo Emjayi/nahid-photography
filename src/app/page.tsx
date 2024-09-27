@@ -135,10 +135,10 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <footer className="footer fixed w-screen bottom-0">
-        <div className="w-full mx-auto max-w-screen-xl p-4 flex flex-col items-center justify-center">
-          <p>
-            <span className="text-sm text-gray-300 font-semibold sm:text-center">© {new Date().getFullYear()} Nahid Shariarpour</span>
+      <footer className="footer fixed w-screen bottom-0 mix-blend-difference">
+        <div className="w-full mx-auto max-w-screen-xl mix-blend-difference p-4 flex flex-col items-center justify-center">
+          <p className='mix-blend-difference'>
+            <span className="text-sm text-gray-300 font-semibold mix-blend-difference sm:text-center">© {new Date().getFullYear()} Nahid Shariarpour</span>
           </p>
           <div className="flex gap-2 mt-2">
             {socialLinks.map((link, index) => (
