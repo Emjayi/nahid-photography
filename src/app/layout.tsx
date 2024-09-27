@@ -78,9 +78,7 @@ export default function RootLayout({
         <ImageCacheProvider>
           <div className="cursor-dot"></div>
           <div className="cursor-outline"></div>
-          <div className='fixed z-10 w-screen prevent-select'>
-            <Navbar />
-          </div>
+          <Navbar />
           <main className="prevent-select bg-white min-h-[100dvh]">{children}</main>
         </ImageCacheProvider>
       </body>

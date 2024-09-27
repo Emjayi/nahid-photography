@@ -99,7 +99,7 @@ export default function Home() {
                 alt={`Desktop Image ${index + 1}`}
                 fill
                 style={{ objectFit: 'cover' }}
-                className='w-full h-full'
+                className='w-full h-full mix-blend-screen'
                 priority={index < 2} // Preload first two images for better UX
               />
             </SwiperSlide>
