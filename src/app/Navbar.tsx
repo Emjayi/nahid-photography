@@ -118,8 +118,8 @@ const Navbar = () => {
                             <li
                                 className={
                                     infoDisplay !== 'hidden'
-                                        ? 'text-zinc-200 duration-200 mix-blend-exclusion text-ellipsis cursor-pointer'
-                                        : 'text-zinc-400 hover:text-zinc-200 duration-200 mix-blend-exclusion text-ellipsis cursor-pointer'
+                                        ? 'text-zinc-200 duration-200 mix-blend-difference text-ellipsis cursor-pointer'
+                                        : 'text-zinc-400 hover:text-zinc-200 duration-200 mix-blend-difference text-ellipsis cursor-pointer'
                                 }
                                 onClick={info}
                             >
@@ -155,8 +155,8 @@ const Navbar = () => {
                                         key={idx}
                                         className={
                                             link.link === path
-                                                ? 'text-zinc-200 duration-200 mix-blend-screen bg-blend-screen text-ellipsis cursor-pointer'
-                                                : 'text-zinc-400 hover:text-zinc-200 duration-200 mix-blend-screen bg-blend-screen text-ellipsis cursor-pointer'
+                                                ? 'text-zinc-200 duration-200 mix-blend-difference bg-blend-screen text-ellipsis cursor-pointer'
+                                                : 'text-zinc-400 hover:text-zinc-200 duration-200 mix-blend-difference bg-blend-screen text-ellipsis cursor-pointer'
                                         }
                                     >
                                         <Link href={link.link}>{link.name}</Link>
