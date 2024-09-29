@@ -6,19 +6,19 @@ import about from '/public/about.png'
 const Page: NextPage = () => {
     return (
         <>
-            <div className='md:flex items-center bg-[#90068E]'>
-                <div className='h-[100dvh] object-contain object-left justify-self-start hidden md:block'></div>
+            <div className='md:flex h-[100dvh] items-center bg-[#90068E]'>
+                <div className='h-[50dvh] flex justify-center items-end *:m-24'>
+                    <Image alt='About Alireza' src={about} className='flex-2 object-right pl-64 pb-9 w-[50%] h-[50dvh]' />
+                    {/* <Image alt='About Alireza' src={about} className='h-[80vh] object-contain justify-self-start block md:hidden' /> */}
 
-                <Image alt='About Alireza' src={about} className='h-[60dvh] object-contain object-left pl-32 justify-self-start hidden md:block' />
-                {/* <Image alt='About Alireza' src={about} className='h-[80vh] object-contain justify-self-start block md:hidden' /> */}
 
-
-                <p className='px-8 block md:hidden text-justify py-8 bg-[#90068E] text-zinc-200'>
-                    Hey, I&apos;m Nahid, a professional photographer from Iran. I began my photography journey in 2016 with street photography and later transitioned into documentary photography, participating in numerous group exhibitions. After some time, I specialized in commercial and industrial photography. I have completed various courses in industrial and commercial photography and the editing process, learning from some of the best instructors in Iran. Over the years, I have worked in product photography, packshots, modeling, food, jewelry, and product graphics. I&apos;ve had the opportunity to collaborate with well-known brands. Photography is my passion, and I enjoy capturing the unique beauty of each product through my lens, creating images that stand out and leave a lasting impression. I&apos;m enthusiastic about bringing my expertise and passion to your business!
-                </p>
-                <p className='px-8 hidden md:block absolute w-[600px] right-32 text-justify py-8 bg-[#90068E] text-zinc-200'>
-                    Hey, I&apos;m Nahid, a professional photographer from Iran. I began my photography journey in 2016 with street photography and later transitioned into documentary photography, participating in numerous group exhibitions. After some time, I specialized in commercial and industrial photography. I have completed various courses in industrial and commercial photography and the editing process, learning from some of the best instructors in Iran. Over the years, I have worked in product photography, packshots, modeling, food, jewelry, and product graphics. I&apos;ve had the opportunity to collaborate with well-known brands. Photography is my passion, and I enjoy capturing the unique beauty of each product through my lens, creating images that stand out and leave a lasting impression. I&apos;m enthusiastic about bringing my expertise and passion to your business!
-                </p>
+                    <p className='px-8 block md:hidden text-justify py-8 bg-[#90068E] text-zinc-200'>
+                        Hey, I&apos;m Nahid, a professional photographer from Iran. I began my photography journey in 2016 with street photography and later transitioned into documentary photography, participating in numerous group exhibitions. After some time, I specialized in commercial and industrial photography. I have completed various courses in industrial and commercial photography and the editing process, learning from some of the best instructors in Iran. Over the years, I have worked in product photography, packshots, modeling, food, jewelry, and product graphics. I&apos;ve had the opportunity to collaborate with well-known brands. Photography is my passion, and I enjoy capturing the unique beauty of each product through my lens, creating images that stand out and leave a lasting impression. I&apos;m enthusiastic about bringing my expertise and passion to your business!
+                    </p>
+                    <p className='px-8 w-[600p] text-justify py-8 bg-[#90068E] text-zinc-200'>
+                        Hey, I&apos;m Nahid, a professional photographer from Iran. I began my photography journey in 2016 with street photography and later transitioned into documentary photography, participating in numerous group exhibitions. After some time, I specialized in commercial and industrial photography. I have completed various courses in industrial and commercial photography and the editing process, learning from some of the best instructors in Iran. Over the years, I have worked in product photography, packshots, modeling, food, jewelry, and product graphics. I&apos;ve had the opportunity to collaborate with well-known brands. Photography is my passion, and I enjoy capturing the unique beauty of each product through my lens, creating images that stand out and leave a lasting impression. I&apos;m enthusiastic about bringing my expertise and passion to your business!
+                    </p>
+                </div>
             </div>
         </>
     )
