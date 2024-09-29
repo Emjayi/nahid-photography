@@ -90,7 +90,7 @@ const Navbar = () => {
                     className={
                         isHome
                             ? 'z-10 fixed w-screen top-0 py-4 mix-blend-difference'
-                            : 'z-10 sticky top-0 py-4 bg-white'
+                            : 'z-10 sticky top-0 py-4 mix-blend-difference bg-white'
                     }
                 >
                     {/* Desktop Navbar */}
@@ -100,7 +100,7 @@ const Navbar = () => {
                                 className={
                                     path === '/'
                                         ? 'hidden'
-                                        : 'text-zinc-400  hover:text-zinc-200 duration-200 mix-blend-difference bg-blend-luminosity text-ellipsis cursor-pointer'
+                                        : 'text-zinc-300  hover:text-zinc-200 duration-200 mix-blend-difference bg-blend-luminosity text-ellipsis cursor-pointer'
                                 }
                             >
                                 <Link href="/">Home</Link>
@@ -108,8 +108,8 @@ const Navbar = () => {
                             <li
                                 className={
                                     worksDisplay !== 'hidden'
-                                        ? 'text-zinc-200 duration-200 mix-blend-difference text-ellipsis cursor-pointer'
-                                        : 'text-zinc-400 hover:text-zinc-200 duration-200 mix-blend-difference text-ellipsis cursor-pointer'
+                                        ? 'text-zinc-100 duration-200 mix-blend-difference text-ellipsis cursor-pointer'
+                                        : 'text-zinc-300 hover:text-white duration-200 mix-blend-difference text-ellipsis cursor-pointer'
                                 }
                                 onClick={works}
                             >
@@ -118,8 +118,8 @@ const Navbar = () => {
                             <li
                                 className={
                                     infoDisplay !== 'hidden'
-                                        ? 'text-zinc-200 duration-200 mix-blend-difference text-ellipsis cursor-pointer'
-                                        : 'text-zinc-400 hover:text-zinc-200 duration-200 mix-blend-difference text-ellipsis cursor-pointer'
+                                        ? 'text-white duration-200 mix-blend-difference text-ellipsis cursor-pointer'
+                                        : 'text-zinc-300 hover:text-white duration-200 mix-blend-difference text-ellipsis cursor-pointer'
                                 }
                                 onClick={info}
                             >
@@ -136,8 +136,8 @@ const Navbar = () => {
                                         key={idx}
                                         className={
                                             link.link === path
-                                                ? 'text-zinc-200 duration-200 mix-blend-difference blend  text-ellipsis cursor-pointer'
-                                                : 'text-zinc-400 hover:text-zinc-200 duration-200 mix-blend-difference bg-blend-difference text-ellipsis cursor-pointer'
+                                                ? 'text-zinc-100 duration-200 mix-blend-difference blend  text-ellipsis cursor-pointer'
+                                                : 'text-zinc-300 hover:text-white duration-200 mix-blend-difference bg-blend-difference text-ellipsis cursor-pointer'
                                         }
                                     >
                                         <Link href={link.link}>{link.name}</Link>
@@ -152,8 +152,8 @@ const Navbar = () => {
                                         key={idx}
                                         className={
                                             link.link === path
-                                                ? 'text-zinc-200 duration-200 mix-blend-difference bg-blend-screen text-ellipsis cursor-pointer'
-                                                : 'text-zinc-400 hover:text-zinc-200 duration-200 mix-blend-difference bg-blend-screen text-ellipsis cursor-pointer'
+                                                ? 'text-zinc-100 duration-200 mix-blend-difference bg-blend-screen text-ellipsis cursor-pointer'
+                                                : 'text-zinc-300 hover:text-zinc-200 duration-200 mix-blend-difference bg-blend-screen text-ellipsis cursor-pointer'
                                         }
                                     >
                                         <Link href={link.link}>{link.name}</Link>

@@ -86,17 +86,6 @@ const Contact: FC = () => {
                         'Submit'
                     )}
                 </Button>
-                <Link href="https://Wa.me/989152027577">
-                    <>
-                        <Button
-                            type='button'
-                            className='flex items-center bg-green-500 hover:bg-green-600'
-                        >
-                            <MessageSquare className='mr-2 h-5 w-5' />
-                            WhatsApp Business
-                        </Button>
-                    </>
-                </Link>
             </div>
         </form>
     );
