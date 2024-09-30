@@ -224,14 +224,6 @@ const Navbar = () => {
                                             </AccordionContent>
                                         </AccordionItem>
                                     </Accordion>
-                                    <Button
-                                        variant="ghost"
-                                        asChild
-                                        onClick={() => setIsMenuOpen(false)}
-                                        className="flex justify-start"
-                                    >
-                                        <Link href="#">Sales</Link>
-                                    </Button>
                                 </nav>
                             </div>
                         </SheetContent>
