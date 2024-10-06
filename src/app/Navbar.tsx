@@ -90,11 +90,11 @@ const Navbar = () => {
                     className={
                         isHome
                             ? 'z-10 fixed w-screen top-0 py-4 mix-blend-difference'
-                            : 'z-10 sticky top-0 py-4 mix-blend-difference bg-white'
+                            : 'z-10 sticky top-0 py-4 bg-[#DBDFE2] bg-opacity-80 backdrop-filter backdrop-blur-md'
                     }
                 >
                     {/* Desktop Navbar */}
-                    <div className="hidden md:flex justify-center">
+                    <div className="hidden md:flex justify-center mix-blend-difference">
                         <ul className="flex gap-4 mix-blend-difference rounded-full px-6 py-2 bg-gradient-to-b">
                             <li
                                 className={

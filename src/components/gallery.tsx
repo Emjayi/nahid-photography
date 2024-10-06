@@ -124,7 +124,7 @@ export default function Gallery() {
     }
 
     return (
-        <div className="min-h-[60vh] min-w-screen bg-white">
+        <div className="min-h-[60vh] min-w-screen bg-[#DBDFE2]">
             <main
                 className={`container mx-auto px-4 transition-opacity duration-500 ${loading && images.length === 0 ? 'opacity-0' : 'opacity-100'
                     }`}
@@ -176,7 +176,7 @@ const GalleryImage = React.memo(function GalleryImage({
             <IKImage
                 urlEndpoint={urlEndpoint}
                 path={image.filePath}
-                transformation={[{ height: '400', width: '400' }]}
+                transformation={[{ height: '260', width: '260', quality: "60" }]}
                 lqip={{ active: true }}
                 loading="lazy"
                 onLoad={onLoad}

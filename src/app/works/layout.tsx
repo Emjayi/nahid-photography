@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 }
 
 const Layout = ({ children }: any) => {
-    return <div className="pt-24 bg-white min-h-screen flex flex-col justify-between">
+    return <div className="pt-24 bg-[#DBDFE2] min-h-screen flex flex-col justify-between">
         {children}
         <Footer />
     </div>

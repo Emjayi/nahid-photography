@@ -60,11 +60,6 @@ export const metadata: Metadata = {
     shortcut: '/favicon-16x16.png',
     apple: '/apple-touch-icon.png',
   },
-  manifest: '/site.webmanifest',
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' },
-  ],
 }
 
 export default function RootLayout({
@@ -79,7 +74,7 @@ export default function RootLayout({
           <div className="cursor-dot"></div>
           <div className="cursor-outline"></div>
           <Navbar />
-          <main className="prevent-select bg-white min-h-[100dvh]">{children}</main>
+          <main className="prevent-select bg-[#DBDFE2] min-h-[100dvh]">{children}</main>
         </ImageCacheProvider>
       </body>
     </html>

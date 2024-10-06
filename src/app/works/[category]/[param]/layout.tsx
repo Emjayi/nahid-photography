@@ -6,6 +6,7 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { ArrowLeft, ArrowRight, LayoutGrid } from 'lucide-react';
 import { ImageContext } from '@/contexts/ImageContext';
+import React from 'react';
 
 
 interface ImageData {
@@ -87,7 +88,7 @@ export default function CategoryLayout({ children }: { children: React.ReactNode
     return (
         <ImageContext.Provider value={{ images, currentIndex, error }}>
             <div
-                className="fixed inset-0 overflow-hidden bg-white flex items-center justify-center z-50"
+                className="fixed inset-0 overflow-hidden bg-[#DBDFE2] flex items-center justify-center z-50"
                 onClick={handleClose}
             >
                 <div className="fixed flex max-h-full p-4" onClick={(e) => e.stopPropagation()}>

@@ -7,6 +7,7 @@ import { IKImage } from 'imagekitio-react';
 import { ImageContext } from '@/contexts/ImageContext';
 import Loading from '@/app/loading';
 import { motion } from 'framer-motion';
+import React from 'react';
 
 const urlEndpoint = process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT;
 

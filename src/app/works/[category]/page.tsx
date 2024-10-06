@@ -1,5 +1,6 @@
 import Gallery from '@/components/gallery'
 import { navbarLinks } from '@/lib/data'
+import React from 'react'
 
 export async function generateStaticParams() {
     return navbarLinks.works.map((work) => ({
